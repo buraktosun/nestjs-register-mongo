@@ -11,7 +11,7 @@ export class UserService {
     }
     _getUserDetails(user: UserDocument): UserDetails {
         return {
-           id : User._id,
+           id : user._id,
            name : user.name,
            email : user.email,
         };
@@ -22,7 +22,7 @@ export class UserService {
     }
 
     async findById(id:string):Promise<UserDetails | null>{
-        const user = await this.userModel.findOne({id}).exec();
+        const user = await this.userModel.findOne({_id : id}).exec();
         if(!user) return null;
         return this._getUserDetails(user);
     }
